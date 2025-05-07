@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #83cbff;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  background-color: #86c0e9;
+  width: 100%;
+  padding: 30px 0;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.header h1 {
+  color: white;
+  font-size: 60px;
+  text-shadow: 5px 5px  black;
+  margin: 0;
+  
+}
+
+.map-container {
+  text-align: center;
+  margin-top: 40px;
+}
+.map-container svg {
+  width: 100%;
+  height: auto;
+}
+.map-container svg {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+
+#svg-wrapper svg {
+  width: 80vw;
+  max-width: 800px;
+}
+
+#svg-wrapper path {
+  cursor: pointer;
+  fill: #ddd;
+  stroke: #222;
+  transition: fill 0.2s;
+}
+
+#zeitwahl-container {
+  font-family: 'Press Start 2P', monospace; /* Oder was du fürs Pixel-Design nutzt */
+  text-align: center;
+  margin-top: 20px;
+}
+
+#zeitwahl {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 2px solid black;
+  border-radius: 5px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.selected {
+  fill: #10ef00;
+}
+
+
+.choose-text {
+  margin-top: 30px;
+  font-size: 16px;
+  color: white;
+  text-shadow: 2px 2px 0 black;
+}
+
+#resultat-ansicht {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+  gap: 40px;
+}
+
+#resultat-links p {
+  margin: 12px 0;
+  font-size: 18px;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+#resultat-rechts #svg-wrapper {
+  width: 300px;
+}
+
+#svg-wrapper svg {
+  width: 100%;
+  height: auto;
+  transition: all 0.4s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+h3 {
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+
+
+#resultat-ansicht {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+  gap: 40px;
+}
+
+#resultat-links, #resultat-rechts {
+  flex: 1;
+}
+
+#karte-mini svg {
+  width: 100%;
+  height: auto;
+}
