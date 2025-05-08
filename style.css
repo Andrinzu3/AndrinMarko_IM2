@@ -27,6 +27,7 @@ body {
 .map-container {
   text-align: center;
   margin-top: 40px;
+  
 }
 .map-container svg {
   width: 100%;
@@ -86,12 +87,15 @@ body {
   align-items: flex-start;
   margin-top: 40px;
   gap: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #resultat-links p {
   margin: 12px 0;
   font-size: 18px;
   font-family: 'Press Start 2P', cursive;
+  font-size: 2vw;
   color: white;
   text-shadow: 2px 2px black;
 }
