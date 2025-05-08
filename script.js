@@ -8,26 +8,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Koordinaten-Mapping für Kantone (erweiterbar)
   const kantonsKoordinaten = {
-    ZH: { lat: 47.3769, lon: 8.5417 },  // Zürich
-    VS: { lat: 46.2333, lon: 7.3667 },  // Sion
-    BE: { lat: 46.9481, lon: 7.4474 },  // Bern
-    // Weitere hinzufügen …
+    AG: { lat: 47.3906, lon: 8.0458 },    // Aarau
+    AI: { lat: 47.3317, lon: 9.4306 },    // Appenzell
+    AR: { lat: 47.3667, lon: 9.3000 },    // Herisau
+    BE: { lat: 46.9481, lon: 7.4474 },    // Bern
+    BL: { lat: 47.4667, lon: 7.6167 },    // Liestal
+    BS: { lat: 47.5596, lon: 7.5886 },    // Basel
+    FR: { lat: 46.8065, lon: 7.1610 },    // Freiburg
+    GE: { lat: 46.2044, lon: 6.1432 },    // Genf
+    GL: { lat: 47.0400, lon: 9.0680 },    // Glarus
+    GR: { lat: 46.8508, lon: 9.5328 },    // Chur
+    JU: { lat: 47.3667, lon: 7.3500 },    // Delémont
+    LU: { lat: 47.0502, lon: 8.3093 },    // Luzern
+    NE: { lat: 46.9930, lon: 6.9310 },    // Neuchâtel
+    NW: { lat: 46.9583, lon: 8.3836 },    // Stans
+    OW: { lat: 46.8750, lon: 8.2486 },    // Sarnen
+    SG: { lat: 47.4245, lon: 9.3767 },    // St. Gallen
+    SH: { lat: 47.6964, lon: 8.6349 },    // Schaffhausen
+    SO: { lat: 47.2088, lon: 7.5370 },    // Solothurn
+    SZ: { lat: 47.0200, lon: 8.6500 },    // Schwyz
+    TG: { lat: 47.5667, lon: 9.2167 },    // Frauenfeld
+    TI: { lat: 46.0101, lon: 8.9600 },    // Bellinzona
+    UR: { lat: 46.8800, lon: 8.6440 },    // Altdorf
+    VD: { lat: 46.5197, lon: 6.6333 },    // Lausanne
+    VS: { lat: 46.2333, lon: 7.3667 },    // Sion
+    ZG: { lat: 47.1667, lon: 8.5167 },    // Zug
+    ZH: { lat: 47.3769, lon: 8.5417 }     // Zürich
   };
+  
 
-  // Kanton klicken
-  kantone.forEach((kanton) => {
-    kanton.addEventListener("click", function () {
-      kantone.forEach(k => k.classList.remove("selected"));
-      this.classList.add("selected");
-      gewaehlterKanton = this.id;
+// Kanton klicken
+kantone.forEach((kanton) => {
+  kanton.addEventListener("click", function () {
+    kantone.forEach(k => k.classList.remove("selected"));
+    this.classList.add("selected");
 
-      document.getElementById("zeitwahl-container").style.display = "block";
+    gewaehlterKanton = this.id.trim().toUpperCase(); // ← das reicht
 
-      if (zeitDropdown.value) {
-        zeigeResultate(gewaehlterKanton, zeitDropdown.value);
-      }
-    });
+    document.getElementById("zeitwahl-container").style.display = "block";
+
+    if (zeitDropdown.value) {
+      zeigeResultate(gewaehlterKanton, zeitDropdown.value);
+    }
   });
+});
+
 
   // Zeitwahl
   zeitDropdown.addEventListener("change", function () {
@@ -73,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await fetch(apiUrl);
       const data = await response.json();
 
-      // Uhrzeit-Index bestimmen
       const stunde = parseInt(zeit.split(":")[0], 10);
       const zeitIndex = data.hourly.time.findIndex(t => new Date(t).getHours() === stunde);
 
@@ -82,11 +106,40 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const ort = kantonId === "ZH" ? "Zürich" :
-                  kantonId === "VS" ? "Sion" :
-                  kantonId === "BE" ? "Bern" :
-                  kantonId;
-      const datum = new Date().toLocaleDateString("de-CH");
+      const kantonNamen = {
+        AG: "Aargau",
+        AI: "Appenzell Innerrhoden",
+        AR: "Appenzell Ausserrhoden",
+        BE: "Bern",
+        BL: "Basel-Landschaft",
+        BS: "Basel-Stadt",
+        FR: "Freiburg",
+        GE: "Genf",
+        GL: "Glarus",
+        GR: "Graubünden",
+        JU: "Jura",
+        LU: "Luzern",
+        NE: "Neuenburg",
+        NW: "Nidwalden",
+        OW: "Obwalden",
+        SG: "St. Gallen",
+        SH: "Schaffhausen",
+        SO: "Solothurn",
+        SZ: "Schwyz",
+        TG: "Thurgau",
+        TI: "Tessin",
+        UR: "Uri",
+        VD: "Waadt",
+        VS: "Wallis",
+        ZG: "Zug",
+        ZH: "Zürich"
+      };
+
+      const ort = kantonNamen[kantonId] || "Unbekannt";
+
+      // Aktuelles Datum erstellen
+      const jetzt = new Date();
+      const datum = `${jetzt.getDate().toString().padStart(2, "0")}.${(jetzt.getMonth() + 1).toString().padStart(2, "0")}.${jetzt.getFullYear()}`;
 
       document.getElementById("resultat-zeitort").textContent = `${zeit} / ${datum} ${ort}`;
       document.getElementById("resultat-uv").textContent = `UV Index: ${data.hourly.uv_index[zeitIndex]}`;

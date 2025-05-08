@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>ALRGY – Schweizkarte</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-
-
-<body>
-  <div class="header">
-    <h1 id="seiten-titel">ALRGY</h1>
-
-  </div>
-
-  <div class="map-container">
-
+<?xml version="1.0" encoding="UTF-8"?>
 <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ns0="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 806 513.2">
+  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+
+      .st1 {
+        fill: #dbdbdb;
+        stroke: #fff;
+        stroke-width: 1.3px;
+      }
+
+      .st2 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="st0" x="19" y="12.1" width="768" height="489"/>
+    </clipPath>
+  </defs>
   <g class="st2">
     <g>
       <path id="GE" class="st1" d="M50.4,372l7.6,6.7,7.2-2.1.2.9,1.5,4.2v1c0,0,1.6,4.1,1.6,4.1l.7,1.1,1.8,1,2.9-1.2,1.2.5.7,5.7-4.5,4.6-11.1,7-9,10-5.6,2.7-5.7-2.8h-7.8c0,0-7.8,1.7-7.8,1.7l-4.2,2.3,2.4-5.3,1.4-2.4.6-2.1-2.9-3.9-1.7-3.4.7-3,4.3-2.5,10.3-4.7h.3c0,0,.3,0,.3,0h.3s1.3.5,1.3.5l1,.2h1c0,0,3.8-1.1,3.8-1.1l.8-1.6v-2.3c0,0,0-2.6,0-2.6l1.4-7,.6-1.9,2.6-5.5,1.7,1.5h0s0,0,0,0Z"/>
@@ -48,58 +52,3 @@
     </g>
   </g>
 </svg>
-      
-<p id="choose-text" class="choose-text">Wähle einen Kanton</p>
-
-</div>
-  <div id="zeitwahl-container" style="display: none; margin-top: 20px;">
-    <label for="zeitwahl">Gewünschte Zeit:</label>
-    <select id="zeitwahl">
-      <option value="">Bitte auswählen</option>
-      <option value="00:00">00:00</option>
-      <option value="01:00">01:00</option>
-      <option value="02:00">02:00</option>
-      <option value="03:00">03:00</option>
-      <option value="04:00">04:00</option>
-      <option value="05:00">05:00</option>
-      <option value="06:00">06:00</option>
-      <option value="07:00">07:00</option>
-      <option value="08:00">08:00</option>
-      <option value="09:00">09:00</option>
-      <option value="10:00">10:00</option>
-      <option value="11:00">11:00</option>
-      <option value="12:00">12:00</option>
-      <option value="13:00">13:00</option>
-      <option value="14:00">14:00</option>
-      <option value="15:00">15:00</option>
-      <option value="16:00">16:00</option>
-      <option value="17:00">17:00</option>
-      <option value="18:00">18:00</option>
-      <option value="19:00">19:00</option>
-      <option value="20:00">20:00</option>
-      <option value="21:00">21:00</option>
-      <option value="22:00">22:00</option>
-      <option value="23:00">23:00</option>
-    </select>
-  </div>
-
-
-      <div id="resultat-ansicht" class="hidden">
-        <div id="resultat-links">
-          <p id="resultat-uv"></p>
-          <p id="resultat-alder"></p>
-          <p id="resultat-birch"></p>
-          <p id="resultat-gras"></p>
-          <p id="resultat-zeitort"></p>
-        </div>
-      
-      <!-- Mini-Karte rechts im Resultat -->
-<div id="resultat-rechts">
-    <div id="karte-mini"></div>
-  </div>
-  
-      
-
-  <script src="script.js"></script>
-</body>
-</html>
