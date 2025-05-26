@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   padding: 0;
@@ -250,6 +251,10 @@ svg {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+#seiten-titel {
+  cursor: pointer;
+}
+
 
 /* Keyframes: von unten nach oben + leichte horizontale Oszillation */
 @keyframes floatUp {
@@ -265,6 +270,9 @@ svg {
     opacity: 0.2;
   }
 }
+
+
+
 /* Mobile: einblenden */
 @media (max-width: 500px) {
   #kanton-select {
@@ -296,34 +304,53 @@ svg {
     text-align: center;
   }
 
-  #resultat-ansicht {
+   #resultat-ansicht {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     gap: 1rem;
-    margin: 1rem 0;
+    margin: 1rem auto;
   }
   #resultat-links p {
     font-size: 1rem;
     line-height: 1.4;
   }
+
   #karte-mini {
-    width: 90vw;
-    max-width: 90vw;
-    margin: 0 auto 0 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
   }
-}
+
+  #karte-mini svg {
+    display: block;
+    width: 80vw;
+    height: auto;
+    margin: 0 auto;
+    transform: scale(1); /* keine Verschiebung */
+    margin-right: 10vw;
+  }
+  }
 
 /* ================== Anzeige-Regeln ================== */
 
 /* Mobil-Dropdown standardmässig verstecken */
+/* Standard: Dropdown verstecken */
 #kanton-select {
-  display: none;
+  display: none !important;
 }
 
-/* Nur auf Mobil anzeigen */
+/* Auf Mobilgeräten (max. 500px) NUR anzeigen, wenn nicht .hidden */
 @media only screen and (max-width: 500px) {
-  #kanton-select {
-    display: block;
+  #kanton-select:not(.hidden) {
+    display: block !important;
+  }
+    #karte-mini svg {
+     margin-right: 15vw;
   }
 }
 
@@ -332,9 +359,7 @@ svg {
   display: block !important;
 }
 
-/* Zusätzliche .hidden-Klasse (z. B. für Resultate) */
-.hidden {
-  display: none !important;
-}
+
+
 
 
