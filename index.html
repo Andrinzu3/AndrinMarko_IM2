@@ -6,15 +6,21 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Smartphone-Liste der Kantone -->
+
+
 
 
 <body>
+  <div id="pollen-container"></div>
   <div class="header">
     <h1 id="seiten-titel">ALRGY</h1>
 
   </div>
 
   <div class="map-container">
+    
 
 <svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ns0="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 806 513.2">
   <g class="st2">
@@ -50,6 +56,37 @@
 </svg>
       
 <p id="choose-text" class="choose-text">Wähle einen Kanton</p>
+<!-- Smartphone-Dropdown für Kantone -->
+<select id="kanton-select" class="mobile-only hidden">
+  <option value="">Bitte wählen…</option>
+  <option value="AG">Aargau</option>
+  <option value="AI">Appenzell Innerrhoden</option>
+  <option value="AR">Appenzell Ausserrhoden</option>
+  <option value="BE">Bern</option>
+  <option value="BL">Basel-Landschaft</option>
+  <option value="BS">Basel-Stadt</option>
+  <option value="FR">Freiburg</option>
+  <option value="GE">Genf</option>
+  <option value="GL">Glarus</option>
+  <option value="GR">Graubünden</option>
+  <option value="JU">Jura</option>
+  <option value="LU">Luzern</option>
+  <option value="NE">Neuenburg</option>
+  <option value="NW">Nidwalden</option>
+  <option value="OW">Obwalden</option>
+  <option value="SG">St. Gallen</option>
+  <option value="SH">Schaffhausen</option>
+  <option value="SO">Solothurn</option>
+  <option value="SZ">Schwyz</option>
+  <option value="TG">Thurgau</option>
+  <option value="TI">Tessin</option>
+  <option value="UR">Uri</option>
+  <option value="VD">Waadt</option>
+  <option value="VS">Wallis</option>
+  <option value="ZG">Zug</option>
+  <option value="ZH">Zürich</option>
+</select>
+
 
 </div>
   <div id="zeitwahl-container" style="display: none; margin-top: 20px;">
@@ -83,16 +120,21 @@
     </select>
   </div>
 
+  <!-- Loader direkt hier, ist nicht in einem versteckten Container -->
+<div id="loader" class="hidden">⏳ Lade Daten…</div>
 
       <div id="resultat-ansicht" class="hidden">
         <div id="resultat-links">
+          
           <p id="resultat-uv"></p>
           <p id="resultat-alder"></p>
           <p id="resultat-birch"></p>
           <p id="resultat-gras"></p>
           <p id="resultat-zeitort"></p>
         </div>
-      
+     
+
+
       <!-- Mini-Karte rechts im Resultat -->
 <div id="resultat-rechts">
     <div id="karte-mini"></div>
