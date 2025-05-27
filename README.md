@@ -1,6 +1,6 @@
 function initPollenDOM() {
   const container = document.getElementById("pollen-container");
-  const count     = 80; // Anzahl Körnchen
+  const count = 80;
 
   for (let i = 0; i < count; i++) {
     const p = document.createElement("div");
@@ -15,21 +15,57 @@ function initPollenDOM() {
     p.style.left = `${Math.random() * 100}vw`;
 
     // zufällige Animation-Dauer & Start-Delay
-    const dur   = 8 + Math.random() * 7;   // 8–15s
-    const delay = -Math.random() * dur;    // rückdatiert für ständigen Flow
-    p.style.animationDuration  = `${dur}s`;
-    p.style.animationDelay     = `${delay}s`;
+    const dur = 8 + Math.random() * 7;
+    const delay = -Math.random() * dur;
+    p.style.animationDuration = `${dur}s`;
+    p.style.animationDelay = `${delay}s`;
 
-    // horizontale Drift als CSS‐Variable
-    const dx = (Math.random() - 0.5) * 20;  // ±10vw
+    // horizontale Drift
+    const dx = (Math.random() - 0.5) * 20;
     p.style.setProperty("--dx", `${dx}vw`);
+
+    // Nur floatUp verwenden
+    p.style.animationName = "floatUp";
 
     container.appendChild(p);
   }
 }
 
+
 // starte Pollen-Animation
 document.addEventListener("DOMContentLoaded", initPollenDOM);
+
+function aktualisierePollenmenge(intensitaet) {
+  const container = document.getElementById("pollen-container");
+  container.innerHTML = ""; // alte Pollen löschen
+
+  // Basisanzahl: 30–150, je nach Belastung
+  const count = Math.min(150, Math.max(30, Math.round(intensitaet * 10)));
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.classList.add("pollen");
+
+    const size = 2 + Math.random() * 14;
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+
+    p.style.left = `${Math.random() * 100}vw`;
+
+    const dur = 8 + Math.random() * 7;
+    const delay = -Math.random() * dur;
+    p.style.animationDuration = `${dur}s`;
+    p.style.animationDelay = `${delay}s`;
+
+    const dx = (Math.random() - 0.5) * 20;
+    p.style.setProperty("--dx", `${dx}vw`);
+
+    p.style.animationName = "floatUp";
+
+    container.appendChild(p);
+  }
+}
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -45,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = document.getElementById("loader");
   const mini     = document.getElementById("karte-mini");
    const container = document.getElementById("resultat-ansicht");
+   
   let gewaehlterKanton = null;
 
   const kantonsKoordinaten = {
@@ -82,6 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
     kantone.forEach(x => x.classList.remove("selected"));
     k.classList.add("selected");
     gewaehlterKanton = k.id.trim().toUpperCase();
+      // 👉 Dropdown aktualisieren, aber nur auf Mobile
+  if (window.innerWidth <= 500 && kantonSelect) {
+    kantonSelect.value = gewaehlterKanton;
+  }
+
     document.getElementById("zeitwahl-container").style.display = "block";
     if (zeitDropdown.value) {
       zeigeResultate(gewaehlterKanton, zeitDropdown.value);
@@ -125,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------- Hauptfunktion mit Loader & Animation ----------
   async function zeigeResultate(kantonId, zeit) {
     // 1) Loader holen und einblenden
-    
+    document.getElementById("controls").classList.add("hidden");
     
     loader.classList.remove("hidden");
     
@@ -179,8 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const ortKurzel = kantonId;
     const ortName = {
   AG: "Aargau",
-  AI: "Appenzell Innerrhoden",
-  AR: "Appenzell Ausserrhoden",
+  AI: "Appenzell AI",
+  AR: "Appenzell AR",
   BE: "Bern",
   BL: "Basel-Landschaft",
   BS: "Basel-Stadt",
@@ -207,13 +249,30 @@ document.addEventListener("DOMContentLoaded", () => {
 }[kantonId] || kantonId;
 
 
+// Zeit Formatierung
+const zeitFormatiert = new Date(data.hourly.time[idx]).toLocaleTimeString("de-CH", {
+  hour: "2-digit",
+  minute: "2-digit"
+});
 
-
-      document.getElementById("resultat-zeitort").textContent = `${zeit}:00 / ${datum} ${ortName}`;
+      document.getElementById("resultat-zeitort").textContent = `${zeitFormatiert} / ${datum} ${ortName}`;
       document.getElementById("resultat-uv").textContent      = `UV Index: ${data.hourly.uv_index[idx]}`;
       document.getElementById("resultat-alder").textContent   = `Alder Pollen: ${data.hourly.alder_pollen[idx]}`;
       document.getElementById("resultat-birch").textContent   = `Birch Pollen: ${data.hourly.birch_pollen[idx]}`;
       document.getElementById("resultat-gras").textContent    = `Gras Pollen: ${data.hourly.grass_pollen[idx]}`;
+
+ 
+// Pollenwerte absichern
+const alder = data.hourly.alder_pollen[idx] ?? 0;
+const birch = data.hourly.birch_pollen[idx] ?? 0;
+const grass = data.hourly.grass_pollen[idx] ?? 0;
+
+const pollenSumme = alder + birch + grass;
+
+console.log(" Gesamtpollenwert:", pollenSumme);
+
+// Animation aktualisieren
+aktualisierePollenmenge(pollenSumme);
 
       // 7) Mini-Karte klonen & anhängen
       const svgOrig  = document.querySelector("svg");
@@ -258,13 +317,28 @@ document.addEventListener("DOMContentLoaded", () => {
       loader.classList.add("hidden");
     }
   }
+
+
+zeitDropdown?.addEventListener("change", () => {
   if (window.innerWidth <= 500 && kantonSelect) {
-  kantonSelect.classList.remove("hidden");
-}
-if (window.innerWidth <= 500 && kantonSelect) {
-  kantonSelect.classList.add("hidden");
+    kantonSelect.classList.add("hidden");
+  }
+});
+// Dropdown bei Fenstergrösse initial korrekt setzen
+if (window.innerWidth <= 500) {
+  kantonSelect?.classList.remove("hidden");
+} else {
+  kantonSelect?.classList.add("hidden");
 }
 
+// Dynamisch auf Fenstergrösse reagieren
+window.addEventListener("resize", () => {
+  if (window.innerWidth <= 500) {
+    kantonSelect?.classList.remove("hidden");
+  } else {
+    kantonSelect?.classList.add("hidden");
+  }
+});
 
  
 

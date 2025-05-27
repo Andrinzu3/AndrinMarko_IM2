@@ -310,7 +310,7 @@ svg {
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 1rem;
+    gap: 3rem;
     margin: 1rem auto;
   }
   #resultat-links p {
@@ -344,13 +344,20 @@ svg {
   display: none !important;
 }
 
-/* Auf Mobilgeräten (max. 500px) NUR anzeigen, wenn nicht .hidden */
-@media only screen and (max-width: 500px) {
+/* Auf Mobilgeräten (max. 600px) NUR anzeigen, wenn nicht .hidden */
+@media only screen and (max-width: 600px) {
   #kanton-select:not(.hidden) {
     display: block !important;
   }
     #karte-mini svg {
      margin-right: 15vw;
+  }
+  .header h1{
+    font-size: 40px;
+  }
+  .resultat-ansicht{
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
