@@ -39,7 +39,7 @@ function aktualisierePollenmenge(intensitaet) {
   container.innerHTML = '';
 
   // Basisanzahl: 30–150, je nach Intensität
-  const count = Math.min(150, Math.max(30, Math.round(intensitaet * 10)));
+  const count = Math.min(200, Math.max(1, Math.round(intensitaet * 20)));
 
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
@@ -195,13 +195,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     `.${jetzt.getFullYear()}`;
 
       const ortNameMap = {
-        AG: 'Aargau', AI: 'Appenzell AI', AR: 'Appenzell AR', BE: 'Bern',
-        BL: 'Basel-Landschaft', BS: 'Basel-Stadt', FR: 'Freiburg', GE: 'Genf',
-        GL: 'Glarus', GR: 'Graubünden', JU: 'Jura', LU: 'Luzern', NE: 'Neuenburg',
-        NW: 'Nidwalden', OW: 'Obwalden', SG: 'St. Gallen', SH: 'Schaffhausen',
-        SO: 'Solothurn', SZ: 'Schwyz', TG: 'Thurgau', TI: 'Tessin', UR: 'Uri',
-        VD: 'Waadt', VS: 'Wallis', ZG: 'Zug', ZH: 'Zürich'
-      };
+  AG: 'Aarau',
+  AI: 'Appenzell',
+  AR: 'Herisau',
+  BE: 'Bern',
+  BL: 'Liestal',
+  BS: 'Basel',
+  FR: 'Fribourg',
+  GE: 'Genf',
+  GL: 'Glarus',
+  GR: 'Chur',
+  JU: 'Delémont',
+  LU: 'Luzern',
+  NE: 'Neuchâtel',
+  NW: 'Stans',
+  OW: 'Sarnen',
+  SG: 'St. Gallen',
+  SH: 'Schaffhausen',
+  SO: 'Solothurn',
+  SZ: 'Schwyz',
+  TG: 'Frauenfeld',
+  TI: 'Bellinzona',
+  UR: 'Altdorf',
+  VD: 'Lausanne',
+  VS: 'Sion',
+  ZG: 'Zug',
+  ZH: 'Zürich'
+};
+
       const ortName = ortNameMap[kantonId] || kantonId;
 
       const zeitFormatiert = new Date(data.hourly.time[idx]).toLocaleTimeString(
