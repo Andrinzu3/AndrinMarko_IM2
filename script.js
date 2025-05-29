@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
       k.classList.add('selected');
       gewaehlterKanton = k.id.trim().toUpperCase();
 
+       // === Zeit-Dropdown zurücksetzen ===
+       zeitDropdown.selectedIndex = 0;
+
       if (window.innerWidth <= 600 && kantonSelect) {
         kantonSelect.value = gewaehlterKanton;
       }
@@ -136,6 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById(iso)?.classList.add('selected');
       gewaehlterKanton = iso;
 
+      // === Zeit-Dropdown zurücksetzen ===
+    zeitDropdown.selectedIndex = 0;
+
       document.getElementById('zeitwahl-container').style.display = 'block';
       if (zeitDropdown.value) {
         zeigeResultate(iso, zeitDropdown.value);
@@ -145,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Zeitwahl
   zeitDropdown.addEventListener('change', () => {
-    console.log('⏰ Zeit gewählt:', zeitDropdown.value);
+    console.log('Zeit gewählt:', zeitDropdown.value);
     if (gewaehlterKanton && zeitDropdown.value) {
       zeigeResultate(gewaehlterKanton, zeitDropdown.value);
     }
