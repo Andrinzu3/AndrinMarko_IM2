@@ -32,7 +32,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 0px;
-  margin-top: 40px;
+  margin-top: 10px;
   position: relative;
   overflow: visible;
   flex-direction: column;
@@ -86,7 +86,7 @@ svg path.selected,
 
 #zeitwahl-container {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 0px;
   font-family: 'Press Start 2P', monospace;
 }
 
