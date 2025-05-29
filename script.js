@@ -157,6 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+   // === Kanton-Select zurücksetzen ===
+  kantonSelect.selectedIndex = 0;                // springt zur ersten Platzhalter-Option
+  gewaehlterKanton = null;                      // interne Variable leeren
+  kantone.forEach(p => p.classList.remove('selected'));
+
   // Reset per Titel-Klick
   titel.addEventListener('click', () => window.location.reload());
 
